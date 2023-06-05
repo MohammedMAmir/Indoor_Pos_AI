@@ -1,0 +1,35 @@
+kitchen: {"HE-2.4G-ground":-48,"BELL154":-58,"HE-2.4G-upstairs":-60,"SantosIG":-87}
+kitchen: {"BELL154":-49,"HE-2.4G-ground":-51,"HE-2.4G-upstairs":-52,"SantosIG":-87,"Rogers443":-89}
+kitchen: {"HE-2.4G-upstairs":-47,"HE-2.4G-ground":-52,"BELL154":-60,"SantosIG":-90}
+kitchen: {"HE-2.4G-ground":-46,"BELL154":-57,"HE-2.4G-upstairs":-58,"SantosIG":-88,"Rogers443":-90}
+kitchen: {"HE-2.4G-ground":-45,"BELL154":-53,"HE-2.4G-upstairs":-55,"SantosIG":-86}
+kitchen: {"HE-2.4G-upstairs":-47,"HE-2.4G-ground":-53,"BELL154":-58}
+kitchen: {"HE-2.4G-ground":-50,"HE-2.4G-upstairs":-52,"BELL154":-57,"BELL205":-85}
+kitchen: {"BELL154":-52,"HE-2.4G-ground":-54,"HE-2.4G-upstairs":-57,"SantosIG":-89}
+kitchen: {"HE-2.4G-upstairs":-43,"HE-2.4G-ground":-46,"BELL154":-49,"SantosIG":-82}
+kitchen: {"HE-2.4G-upstairs":-48,"BELL154":-48,"HE-2.4G-ground":-50,"SantosIG":-81}
+kitchen: {"HE-2.4G-upstairs":-46,"BELL154":-49,"HE-2.4G-ground":-52,"SantosIG":-80,"Rogers443":-95}
+meeting room: {"HE-2.4G-ground":-43,"BELL154":-52,"HE-2.4G-upstairs":-71,"Turbo":-90,"NETGEAR":-93,"NETGEAR":-95,"NETGEAR":-97,"NETGEAR_EXT":-97}
+meeting room: {"BELL154":-47,"HE-2.4G-ground":-52,"HE-2.4G-upstairs":-70,"NETGEAR_EXT":-93,"Rogers443":-94}
+meeting room: {"HE-2.4G-ground":-37,"BELL154":-48,"HE-2.4G-upstairs":-64,"BELL205":-90,"SantosIG":-92}
+meeting room: {"HE-2.4G-ground":-43,"BELL154":-61,"HE-2.4G-upstairs":-74,"Rogers443":-87,"NETGEAR_EXT":-94}
+meeting room: {"BELL154":-51,"HE-2.4G-ground":-57,"HE-2.4G-upstairs":-67,"NETGEAR":-86,"Rogers443":-87,"Turbo":-89,"NETGEAR00":-89,"NETGEAR00-Guest":-90,"NETGEAR_EXT":-95}
+meeting room: {"HE-2.4G-ground":-43,"BELL154":-59,"HE-2.4G-upstairs":-68,"SantosIG":-90}
+meeting room: {"BELL154":-44,"HE-2.4G-ground":-48,"HE-2.4G-upstairs":-70,"Rogers443":-86,"NETGEAR_EXT":-90,"SantosIG":-91}
+meeting room: {"HE-2.4G-ground":-45,"BELL154":-54,"HE-2.4G-upstairs":-70,"NETGEAR":-86,"Rogers443":-88,"NETGEAR_EXT":-88}
+meeting room: {"HE-2.4G-ground":-46,"BELL154":-60,"HE-2.4G-upstairs":-69,"NETGEAR":-84,"Turbo":-86,"Rogers443":-95}
+meeting room: {"HE-2.4G-ground":-52,"BELL154":-57,"HE-2.4G-upstairs":-73,"NETGEAR":-86,"Rogers443":-90,"NETGEAR_EXT":-91}
+meeting room: {"HE-2.4G-ground":-44,"BELL154":-51,"HE-2.4G-upstairs":-70,"NETGEAR":-81,"NETGEAR":-84,"NETGEAR_EXT":-86,"Turbo":-91,"NETGEAR00":-91,"NETGEAR00-Guest":-91,"Rogers443":-93}
+hallway: {"BELL154":-42,"HE-2.4G-ground":-44,"HE-2.4G-upstairs":-74,"SantosIG":-89,"Rogers443":-92}
+hallway: {"HE-2.4G-ground":-31,"BELL154":-46,"HE-2.4G-upstairs":-56,"Rogers443":-91,"NETGEAR_EXT":-94}
+hallway: {"HE-2.4G-ground":-42,"BELL154":-47,"HE-2.4G-upstairs":-56,"SantosIG":-87,"NETGEAR_EXT":-90}
+hallway: {"HE-2.4G-ground":-35,"BELL154":-47,"HE-2.4G-upstairs":-64,"SantosIG":-89,"BELL205":-92}
+hallway: {"HE-2.4G-ground":-24,"BELL154":-39,"HE-2.4G-upstairs":-69,"SantosIG":-89}
+hallway: {"BELL154":-40,"HE-2.4G-ground":-43,"HE-2.4G-upstairs":-62}
+hallway: {"HE-2.4G-ground":-34,"BELL154":-39,"HE-2.4G-upstairs":-64,"Turbo":-86,"BELL205":-89,"SantosIG":-89,"NETGEAR_EXT":-92}
+hallway: {"HE-2.4G-ground":-40,"BELL154":-51,"HE-2.4G-upstairs":-71,"NETGEAR00-Guest":-79,"NETGEAR00":-82,"Turbo":-85,"NETGEAR_EXT":-89,"ORBI87":-89,"BELL205":-91,"VIRGIN186":-91}
+hallway: {"HE-2.4G-ground":-41,"BELL154":-49,"HE-2.4G-upstairs":-75,"NETGEAR":-80,"Rogers443":-88,"Turbo":-89,"NETGEAR_EXT":-90,"BELL205":-90,"SantosIG":-91}
+hallway: {"HE-2.4G-ground":-37,"BELL154":-51,"HE-2.4G-upstairs":-60,"NETGEAR_EXT":-87,"BELL205":-89,"SantosIG":-90,"Rogers443":-93,"Turbo":-93}
+hallway: {"HE-2.4G-ground":-36,"BELL154":-52,"HE-2.4G-upstairs":-56}
+hallway: {"BELL154":-38,"HE-2.4G-ground":-42,"HE-2.4G-upstairs":-67,"SantosIG":-88,"Turbo":-89}
+hallway: {"HE-2.4G-ground":-37,"BELL154":-47,"HE-2.4G-upstairs":-60,"SantosIG":-88}
