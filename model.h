@@ -1,6 +1,5 @@
 #pragma once
 #include <cstdarg>
-
 class RandomForest {
                 public:
                     /**
@@ -953,6 +952,3 @@ class RandomForest {
 
                 protected:
                 };
-            }
-        }
-    }
