@@ -2,10 +2,17 @@
 
 import csv
 import sys
-import time
-import string
 import copy
 import numpy
+import torch
+from sklearn.svm import SVC
+from micromlgen import port
+from glob import glob
+from os.path import basename
+
+
+torch.manual_seed(1) # set the random seed
+device = torch.device('cpu')
 
 
 networks_dictionary = dict()
@@ -14,75 +21,18 @@ input_dim = 0
 MAX_NETWORKS = 10
 entries_array = []
 
-## ---- CLASS ATTEMPT ---- ##
+def load_features(folder):
+    dataset = None
+    classmap = {}
+    for class_idx, filename in enumerate(glob('%s/*.csv' % folder)):
+        class_name = basename(filename)[:-4]
+        classmap[class_idx] = class_name
+        samples = numpy.loadtxt(filename, dtype=float, delimiter=',')
+        labels = numpy.ones((len(samples), 1)) * class_idx
+        samples = numpy.hstack((samples, labels))
+        dataset = samples if dataset is None else numpy.vstack((dataset, samples))
 
-## ---- ACCURACY MEASUREMENT FUNCTION ---- ##
-def get_accuracy(model, train=False):
-    if train:
-        data = mnist_train
-    else:
-        data = mnist_val
-
-    correct = 0
-    total = 0
-    for imgs, labels in torch.utils.data.DataLoader(data, batch_size=64):
-        output = model(imgs)
-        #select index with maximum prediction score
-        pred = output.max(1, keepdim=True)[1]
-        correct += pred.eq(labels.view_as(pred)).sum().item()
-        total += imgs.shape[0]
-    return correct / total
-  
-
-## ---- TRAINING LOOP FUNCTION ---- ## 
-
-def train(model, labels_array, data_array, batch_size=4, num_epochs=1 , print_stat = 1):
-    
-    train_loader = torch.utils.data.DataLoader(data, batch_size=batch_size)
-    i1, l1 = next(iter(train_loader))
-    criterion = nn.CrossEntropyLoss()
-    optimizer = optim.SGD(model.parameters(), lr=0.01, momentum=0.9)
-    
-
-    iters, losses, train_acc, val_acc = [], [], [], []
-
-    # training
-    n = 0 # the number of iterations
-    for epoch in range(num_epochs):
-        for labels, vector in iter(train_loader):
-            print(numpy.array(vector).size)
-            out = model(torch.tensor(vector))             # forward pass
-            loss = criterion(out, labels) # compute the total loss
-            loss.backward()               # backward pass (compute parameter updates)
-            optimizer.step()              # make the updates for each parameter
-            optimizer.zero_grad()         # a clean up step for PyTorch
-
-            # save the current training information
-            iters.append(n)
-            losses.append(float(loss)/batch_size)             # compute *average* loss
-            train_acc.append(get_accuracy(model, train=True)) # compute training accuracy 
-            val_acc.append(get_accuracy(model, train=False))  # compute validation accuracy
-            n += 1
-
-    if print_stat:
-      # plotting
-      plt.title("Training Curve")
-      plt.plot(iters, losses, label="Train")
-      plt.xlabel("Iterations")
-      plt.ylabel("Loss")
-      plt.show()
-
-      plt.title("Training Curve")
-      plt.plot(iters, train_acc, label="Train")
-      plt.plot(iters, val_acc, label="Validation")
-      plt.xlabel("Iterations")
-      plt.ylabel("Training Accuracy")
-      plt.legend(loc='best')
-      plt.show()
-
-      print("Final Training Accuracy: {}".format(train_acc[-1]))
-      print("Final Validation Accuracy: {}".format(val_acc[-1]))
-    
+    return dataset, classmap
 
 ## ---- MAIN CODE ---- ##
 
@@ -153,38 +103,24 @@ with open (sys.argv[1], "r") as file:
     numpy_data = numpy.array(data_array)
     print(numpy_data)
 
-    with open('data.csv', 'w', encoding='UTF8') as data_file:
-        writer = csv.writer(data_file)
-        for i in numpy_data:
-            writer.writerow(i)
-## ---- MODEL CREATION AND TRAINING ---- ##
-    import torch
-    import torch.nn as nn
-    import torch.nn.functional as F
+    for line in numpy_data:
+        name = line[0]
 
-    import matplotlib.pyplot as plt # for plotting
-    import torch.optim as optim #for gradient descent
+        name = 'data/' + name + '.csv'
+        file = open(name, 'a')
+        writer = csv.writer(file)
+        count = 0
+        
+        writer.writerow(line[1:input_dim + 2])
 
-    torch.manual_seed(1) # set the random seed
-
-    #main model architecture 
-    class LocationClassifier(nn.Module):
-        def __init__(self):
-            super(LocationClassifier, self).__init__()
-            self.layer1 = nn.Linear(input_dim, 50)
-            self.layer2 = nn.Linear(50, 20)
-            self.layer3 = nn.Linear(20, 3)
-        def forward(self, vector):
-            activation1 = F.relu(self.layer1(vector))
-            activation2 = F.relu(self.layer2(activation1))
-            output = self.layer3(activation2)
-            return output
-
-    model = LocationClassifier()
-
-    print('done')  
-    train(model, label_array, data_array, num_epochs=500, print_stat=0)
-
-
+## ---- TRAIN SVM CLASSIFIER AND OUTPUT C CODE ---- ##
+    # put your samples in the dataset folder
+    # one class per file
+    # one feature vector per line, in CSV format
+    features, classmap = load_features('data/')
+    X, y = features[:, :-1], features[:, -1]
+    classifier = SVC(kernel='linear', gamma=0.001).fit(X, y)
+    c_code = port(classifier, classmap=classmap)
+    print(c_code)
     
         
