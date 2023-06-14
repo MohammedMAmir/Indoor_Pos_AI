@@ -127,7 +127,7 @@ with open (sys.argv[1], "r") as file:
         dictionary.close
 
 
-## ---- TO DO (ISIAH) ---- ##
+## ---- TO DO (ISAIAH) ---- ##
     # 1) Have a function in the main loop that places the RSSI of each network from a single scan
     #    in the correct index of an int array using the networks_legend.txt file
     #       - if an SSI isn't in the networks_legend.txt file, disregard it
