@@ -5,7 +5,7 @@ import sys
 import copy
 import numpy
 import torch
-from sklearn.svm import SVC
+from sklearn.ensemble import RandomForestClassifier
 from micromlgen import port
 from glob import glob
 from os.path import basename
@@ -90,7 +90,7 @@ with open (sys.argv[1], "r") as file:
     
 
     print(input_dim)
-    print(output_array)
+
     new_array = []
     labels = []
     data_array = []
@@ -99,9 +99,7 @@ with open (sys.argv[1], "r") as file:
         data_array.append(i[1])
         new_array.append(i[1].insert(0, i[0]))
 
-    print(labels)
     numpy_data = numpy.array(data_array)
-    print(numpy_data)
 
     for line in numpy_data:
         name = line[0]
@@ -119,8 +117,23 @@ with open (sys.argv[1], "r") as file:
     # one feature vector per line, in CSV format
     features, classmap = load_features('data/')
     X, y = features[:, :-1], features[:, -1]
-    classifier = SVC(kernel='linear', gamma=0.001).fit(X, y)
+    classifier = RandomForestClassifier(20, max_depth=10).fit(X, y)
     c_code = port(classifier, classmap=classmap)
     print(c_code)
     
-        
+    for i in networks_dictionary:
+        dictionary = open("networks_legend.txt", 'a')
+        dictionary.write(i + '\n')
+        dictionary.close
+
+
+## ---- TO DO (ISIAH) ---- ##
+    # 1) Have a function in the main loop that places the RSSI of each network from a single scan
+    #    in the correct index of an int array using the networks_legend.txt file
+    #       - if an SSI isn't in the networks_legend.txt file, disregard it
+    #       - the area names {indoor}, {office}, etc. should not be part of the array
+    #       - Do NOT hardcode this. It needs to be automated so that it can be redeployed on any tag
+    # 2) Pass the created array to the RandomForest.predictLabel function and store the result in 
+    #    char array
+    #       - You will need to copy the RandomForest class outputted by the python script
+    # 3) Output the prediction to the LED board.
