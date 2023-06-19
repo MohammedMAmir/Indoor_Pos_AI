@@ -85,6 +85,10 @@ void setup() {
     wifiScanner.identifyByMAC();
     wifiScanner.identifyBySSID();
 
+    float RSSIs[count];
+    for (int k = 0; k < count; k++) {
+        RSSIs[k] = 0.0;
+    }
 }
 
 void loop() {
@@ -92,10 +96,17 @@ void loop() {
         location = Serial.readStringUntil('\n');
     }
     wifiScanner.scan();
+    int numNetworks = WiFi.scanNetworks();
 
-    for (int i = 0; i < count; i++) {
-
+    for (int i = 0; i < numNetworks; i++) {
+        for (int j = 0; j < count; j++) {
+            if (wifiScanner.idAt(i) == dictionary[j]) {
+                RSSIs[j] = wifiScanner.rssiAt(i);
+            }
+        }
     }
+
+    delay(2000);
 
     /*
     if (location != "" && location != "stop") {
