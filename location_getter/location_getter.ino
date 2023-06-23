@@ -32,7 +32,7 @@ void setup() {
     // Close the file
     fclose(fp);
 
-    char dictionary[count];
+    char dictionary[count][1000];
 
     // Stores the data from networks_legend in a string array
     ptr = fopen("networks_legend.txt", "r");
