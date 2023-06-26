@@ -5,22 +5,24 @@
 #include <string.h>
 #include <stdlib.h>
 #include <LiquidCrystal_I2C.h>
-#include "C:\Users\user\Documents\Indoor_Positioning\model.h"
+#include "C:\Users\user\PycharmProjects\Indoor_Pos_AI\model.h"
 int lcdColumns = 16;
 int lcdRows = 2;
 LiquidCrystal_I2C lcd(0x27, lcdColumns, lcdRows);
 
 String location;
 int count;
+char** dictionary;
+float* RSSIs;
 
 void setup() {
     RandomForest forest;
     FILE* ptr;
-    FILE *fp = fopen("C:\Users\user\PycharmProjects\Indoor_Pos_AI\networks_legend.txt","r");
+    FILE *fp = fopen("C:/Users/user/PycharmProjects/Indoor_Pos_AI/networks_legend.txt","r");
     char ch;
     char curr;
 
-    if (fp == file) {
+    if (fp == NULL) {
         printf("file can't be opened \n");
     }
     while(!feof(fp)) {
@@ -105,6 +107,13 @@ void loop() {
                 RSSIs[j] = wifiScanner.rssiAt(i);
             }
         }
+    }
+
+    for(int i = 0; i < count; i++) {
+      Serial.print(dictionary[i]);
+      Serial.print(": ");
+      Serial.print(RSSIs[i], 1);
+      Serial.print("\n");
     }
 
     delay(2000);
