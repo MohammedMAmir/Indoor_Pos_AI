@@ -5,22 +5,25 @@
 #include <string.h>
 #include <stdlib.h>
 #include <LiquidCrystal_I2C.h>
-#include "C:\Users\user\Documents\Indoor_Positioning\model.h"
+#include "C:\Users\user\PycharmProjects\Indoor_Pos_AI\model.h"
 int lcdColumns = 16;
 int lcdRows = 2;
 LiquidCrystal_I2C lcd(0x27, lcdColumns, lcdRows);
 
 String location;
 int count;
+char** dictionary;
+float* RSSIs;
 
 void setup() {
     RandomForest forest;
+
     FILE* ptr;
-    FILE *fp = fopen("C:\Users\user\PycharmProjects\Indoor_Pos_AI\networks_legend.txt","r");
+    FILE *fp = fopen("C:/Users/user/PycharmProjects/Indoor_Pos_AI/networks_legend.txt","r");
     char ch;
     char curr;
 
-    if (fp == file) {
+    if (fp == NULL) {
         printf("file can't be opened \n");
     }
     while(!feof(fp)) {
@@ -33,6 +36,7 @@ void setup() {
     fclose(fp);
 
     char dictionary[count][1000];
+
 
     // Stores the data from networks_legend in a string array
     ptr = fopen("networks_legend.txt", "r");
@@ -53,20 +57,19 @@ void setup() {
     }
     */
 
-    /*
+
     // Opening file in reading mode
     ptr = fopen("networks_legend.txt", "r");
     if (NULL == ptr) {
         printf("file can't be opened \n");
     }
-    for (c = getc(fp); c != EOF; c = getc(fp)) {
+    for (char c = getc(fp); c != EOF; c = getc(fp)) {
         if (c == '\n') { // Increment count if this character is newline
             count = count + 1;
         }
     }
     // Close the file
     fclose(ptr);
-    */
 
     // initialize LCD
     lcd.init();
@@ -107,7 +110,15 @@ void loop() {
         }
     }
 
+    for(int i = 0; i < count; i++) {
+      Serial.print(dictionary[i]);
+      Serial.print(": ");
+      Serial.print(RSSIs[i], 1);
+      Serial.print("\n");
+    }
+
     delay(2000);
+
 
     /*
     if (location != "" && location != "stop") {
@@ -117,7 +128,7 @@ void loop() {
         int numNetworks = WiFi.scanNetworks();
 
         for (uint8_t i = 0; i < numNetworks; i++) {
-            if (wifiScanner.idAt(i) == "ESP32_ONE" || wifiScanner.idAt(i) == "ESP32_TWO" || wifiScanner.idAt(i) == "ESP32_THR" || wifiScanner.idAt(i) == "ESP32_FOUR") {
+            if (wifiScanner.idAt(i) == "ESP8266_ONE" || wifiScanner.idAt(i) == "ESP8266_TWO" || wifiScanner.idAt(i) == "ESP8266_THREE" || wifiScanner.idAt(i) == "ESP8266_FOUR") {
                 Serial.print(wifiScanner.idAt(i));
                 Serial.print('"');
                 Serial.print(':');
@@ -127,7 +138,7 @@ void loop() {
                 scrollText(1, message, 250, lcdColumns);
             }
         }
-    
+
         delay(2000);
     }
     */
