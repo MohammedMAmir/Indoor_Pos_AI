@@ -9,6 +9,7 @@ from sklearn.ensemble import RandomForestClassifier
 from micromlgen import port
 from glob import glob
 from os.path import basename
+import os, shutil
 
 
 torch.manual_seed(1) # set the random seed
@@ -101,7 +102,19 @@ with open (sys.argv[1], "r") as file:
         new_array.append(i[1].insert(0, i[0]))
 
     numpy_data = numpy.array(data_array)
-
+    
+    # delete all the old data
+    folder = 'C:/Users/user/Documents/Indoor_Positioning/data'
+    for filename in os.listdir(folder):
+        file_path = os.path.join(folder, filename)
+        try:
+            if os.path.isfile(file_path) or os.path.islink(file_path):
+                os.unlink(file_path)
+            elif os.path.isdir(file_path):
+                shutil.rmtree(file_path)
+        except Exception as e:
+            print('Failed to delete %s. Reason: %s' % (file_path, e))
+            
     for line in numpy_data:
         name = line[0]
 

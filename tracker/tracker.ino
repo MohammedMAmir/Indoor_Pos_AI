@@ -59,7 +59,6 @@ void loop() {
     // }
 
     delay(2000);
-    lcd.clear();
 }
 
 void scan(){
@@ -92,6 +91,7 @@ void printFeatures() {
 }
 
 void scrollText(int row, String message, int delayTime, int lcdColumns) {
+    lcd.clear();
     for (int i=0; i < lcdColumns; i++) {
         message = " " + message;
     }
@@ -105,6 +105,7 @@ void scrollText(int row, String message, int delayTime, int lcdColumns) {
 
 void classify() {
   String prediction = forest.predictLabel(RSSIs);
+  lcd.clear();
   Serial.print("You are in: ");
   Serial.println(prediction);
   lcd.setCursor(0,0);
