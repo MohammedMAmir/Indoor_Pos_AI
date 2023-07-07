@@ -8,7 +8,6 @@
 
 // replace with WiFiNINA.h if you use a different board
 #include "WiFi.h"
-#include "model.h"
 #include "eloquent.h"
 #include "eloquent/networking/wifi/WifiScanner.h"
 
@@ -42,20 +41,5 @@ void loop() {
         wifiScanner.scan();
         wifiScanner.printAsJson(Serial);
         delay(2000);
-    }
-
-    for (uint8_t i = 0; i < numNetworks; i++) {
-        for (uint8_t j = 0; j < ; j++) {
-
-        }
-        if (wifiScanner.idAt(i) == "ESP32_ONE" || wifiScanner.idAt(i) == "ESP32_TWO" || wifiScanner.idAt(i) == "ESP32_THR" || wifiScanner.idAt(i) == "ESP32_FOUR") {
-            Serial.print(wifiScanner.idAt(i));
-            Serial.print('"');
-            Serial.print(':');
-            Serial.print(wifiScanner.rssiAt(i));
-            Serial.println("");
-            String message = wifiScanner.idAt(i) + ": " + wifiScanner.rssiAt(i);
-            scrollText(1, message, 250, lcdColumns);
-        }
     }
 }

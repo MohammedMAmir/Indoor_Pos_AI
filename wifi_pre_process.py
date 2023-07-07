@@ -45,6 +45,7 @@ with open (sys.argv[1], "r") as file:
         location_vs_network = line.split("{")
         #remove the final brace bracket
         location_vs_network[1] = location_vs_network[1].replace("}\n", "")
+        location_vs_network[1] = location_vs_network[1].replace("}", "")
         #split into a list of each network and its respective strength
         location_vs_network[1] = location_vs_network[1].split(",")
         #for each network and its respective strength, split the name and the strength and store each
@@ -119,21 +120,24 @@ with open (sys.argv[1], "r") as file:
     X, y = features[:, :-1], features[:, -1]
     classifier = RandomForestClassifier(20, max_depth=10).fit(X, y)
     c_code = port(classifier, classmap=classmap)
-    print(c_code)
+    # print(c_code)
     
+    model_h = open("model.h", 'w')
+    model_h.write(c_code)
+    
+    model_h.close()
+    count = 0
+    model_h = open("model.h", 'a')
+    model_h.write("\n")
+    model_h.write("char dictionary[" + str(len(networks_dictionary)) +"][30] = {")
     for i in networks_dictionary:
-        dictionary = open("networks_legend.txt", 'a')
-        dictionary.write(i + '\n')
-        dictionary.close
+        if(count != 0):
+            model_h.write(", ")
+        model_h.write(i)
+        count+=1
+    model_h.write("};\n")
+    model_h.write("#define DICTIONARY_SIZE ")
+    model_h.write(str(len(networks_dictionary)))
+    model_h.close()
 
 
-## ---- TO DO (ISAIAH) ---- ##
-    # 1) Have a function in the main loop that places the RSSI of each network from a single scan
-    #    in the correct index of an int array using the networks_legend.txt file
-    #       - if an SSI isn't in the networks_legend.txt file, disregard it
-    #       - the area names {indoor}, {office}, etc. should not be part of the array
-    #       - Do NOT hardcode this. It needs to be automated so that it can be redeployed on any tag
-    # 2) Pass the created array to the RandomForest.predictLabel function and store the result in 
-    #    char array
-    #       - You will need to copy the RandomForest class outputted by the python script
-    # 3) Output the prediction to the LED board.

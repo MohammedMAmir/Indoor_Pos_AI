@@ -5,7 +5,7 @@
 #include <string.h>
 #include <stdlib.h>
 #include <LiquidCrystal_I2C.h>
-#include "C:\Users\user\PycharmProjects\Indoor_Pos_AI\model.h"
+#include "C:/Users/user/Documents/Indoor_Positioning/model.h"
 int lcdColumns = 16;
 int lcdRows = 2;
 LiquidCrystal_I2C lcd(0x27, lcdColumns, lcdRows);

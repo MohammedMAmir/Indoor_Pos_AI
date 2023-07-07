@@ -5,7 +5,7 @@
 #include <string.h>
 #include <stdlib.h>
 #include <LiquidCrystal_I2C.h>
-#include "C:\Users\user\PycharmProjects\Indoor_Pos_AI\model.h"
+#include "C:/Users/user/Documents/Indoor_Positioning/model.h"
 int lcdColumns = 16;
 int lcdRows = 2;
 LiquidCrystal_I2C lcd(0x27, lcdColumns, lcdRows);
@@ -17,37 +17,37 @@ float* RSSIs;
 
 void setup() {
     RandomForest forest;
-    FILE* ptr;
-    FILE *fp = fopen("C:/Users/user/PycharmProjects/Indoor_Pos_AI/networks_legend.txt","r");
-    char ch;
-    char curr;
+    //FILE* ptr;
+    //FILE *fp = fopen("C:/Users/user/PycharmProjects/Indoor_Pos_AI/networks_legend.txt","r");
+    //char ch;
+    //char curr;
 
-    if (fp == NULL) {
-        printf("file can't be opened \n");
-    }
-    while(!feof(fp)) {
-        curr = fgetc(fp);
-        if (curr == '\n') { // Increment count if this character is newline
-            count = count + 1;
-        }
-    }
+    //if (fp == NULL) {
+    //    printf("file can't be opened \n");
+    //}
+    //while(!feof(fp)) {
+    //    curr = fgetc(fp);
+    //    if (curr == '\n') { // Increment count if this character is newline
+    //        count = count + 1;
+    //    }
+    //}
     // Close the file
-    fclose(fp);
+    //fclose(fp);
 
-    char dictionary[count][1000];
+    //char dictionary[count][1000];
 
     // Stores the data from networks_legend in a string array
-    ptr = fopen("networks_legend.txt", "r");
-    if (ptr == NULL) {
-        printf("Error opening file.");
-    }
-    int line = 0;
-    while (!feof(ptr) && !ferror(ptr)) {
-        if (fgets(dictionary[line], 100, ptr) != NULL) {
-            line++;
-        }
-    }
-    fclose(ptr);
+    //ptr = fopen("networks_legend.txt", "r");
+    //if (ptr == NULL) {
+    //    printf("Error opening file.");
+    //}
+    //int line = 0;
+    //while (!feof(ptr) && !ferror(ptr)) {
+    //    if (fgets(dictionary[line], 100, ptr) != NULL) {
+    //        line++;
+    //    }
+    //}
+    //fclose(ptr);
 
     /*
     for (int i = 0; i < line; i++) {
