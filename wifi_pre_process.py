@@ -11,7 +11,6 @@ from glob import glob
 from os.path import basename
 import os, shutil
 
-
 torch.manual_seed(1) # set the random seed
 device = torch.device('cpu')
 

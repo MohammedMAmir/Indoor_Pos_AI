@@ -40,24 +40,6 @@ void loop() {
   // put your main code here, to run repeatedly:
     scan();
     classify();
-    // wifiScanner.scan();
-    // int numNetworks = WiFi.scanNetworks();
-
-    // for (int i = 0; i < numNetworks; i++) {
-    //     for (int j = 0; j < count; j++) {
-    //         if (wifiScanner.idAt(i) == dictionary[j]) {
-    //             RSSIs[j] = wifiScanner.rssiAt(i);
-    //         }
-    //     }
-    // }
-
-    // for(int i = 0; i < count; i++) {
-    //   Serial.println(dictionary[i]);
-    //   Serial.print(": ");
-    //   Serial.println(RSSIs[i], 1);
-    //   Serial.println("\n");
-    // }
-
     delay(2000);
 }
 
@@ -88,19 +70,6 @@ void printFeatures() {
     Serial.print(RSSIs[i]);
     Serial.print(i == DICTIONARY_SIZE - 1 ? '\n' : ',');
   }
-}
-
-void scrollText(int row, String message, int delayTime, int lcdColumns) {
-    lcd.clear();
-    for (int i=0; i < lcdColumns; i++) {
-        message = " " + message;
-    }
-    message = message + " ";
-    for (int pos = 0; pos < message.length(); pos++) {
-        lcd.setCursor(0, row);
-        lcd.print(message.substring(pos, pos + lcdColumns));
-        delay(delayTime);
-    }
 }
 
 void classify() {
